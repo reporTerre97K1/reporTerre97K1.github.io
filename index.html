@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BotExtion — Твій Telegram бот</title>
+  <title>BotExtion — Твой Telegram бот</title>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* ── GRID BACKGROUND ── */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +42,6 @@
       z-index: 0;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -93,7 +91,6 @@
     }
     .nav-btn:hover { opacity: .85; transform: translateY(-1px); }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       z-index: 1;
@@ -177,7 +174,6 @@
     }
     .btn-ghost:hover { background: rgba(39,196,245,0.08); border-color: var(--cyan); }
 
-    /* ── TERMINAL ── */
     .terminal {
       width: 100%;
       max-width: 560px;
@@ -233,7 +229,6 @@
     }
     @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
 
-    /* ── SECTIONS ── */
     section { position: relative; z-index: 1; padding: 100px 6%; }
 
     .section-label {
@@ -263,7 +258,6 @@
       margin-bottom: 3rem;
     }
 
-    /* ── FEATURES ── */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -297,11 +291,7 @@
     }
     .feature-card:hover::before { opacity: 1; }
 
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
 
     .feature-title {
       font-family: 'Exo 2', sans-serif;
@@ -311,13 +301,8 @@
       margin-bottom: .5rem;
     }
 
-    .feature-desc {
-      font-size: .875rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
+    .feature-desc { font-size: .875rem; color: var(--muted); line-height: 1.65; }
 
-    /* ── CHAT DEMO ── */
     .chat-demo-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -361,25 +346,14 @@
 
     .chat-messages { padding: 18px; display: flex; flex-direction: column; gap: .75rem; }
 
-    .msg {
-      display: flex;
-      flex-direction: column;
-      gap: .2rem;
-      max-width: 85%;
-    }
-
+    .msg { display: flex; flex-direction: column; gap: .2rem; max-width: 85%; }
     .msg.user { align-self: flex-end; align-items: flex-end; }
     .msg.bot { align-self: flex-start; }
 
     .msg-sender { font-size: .65rem; color: var(--cyan); font-weight: 600; }
     .msg.user .msg-sender { color: var(--teal); }
 
-    .msg-bubble {
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: .82rem;
-      line-height: 1.5;
-    }
+    .msg-bubble { padding: 8px 14px; border-radius: 12px; font-size: .82rem; line-height: 1.5; }
 
     .msg.user .msg-bubble {
       background: linear-gradient(135deg, var(--blue), #1557A8);
@@ -394,14 +368,8 @@
       border-bottom-left-radius: 3px;
     }
 
-    .msg-sep {
-      font-size: .7rem;
-      color: var(--muted);
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .msg-sep { font-size: .7rem; color: var(--muted); text-align: center; font-family: 'JetBrains Mono', monospace; }
 
-    /* ── COMMANDS TABLE ── */
     .commands-wrap {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -438,7 +406,6 @@
       border-bottom: 1px solid rgba(39,196,245,0.05);
       gap: 1rem;
     }
-
     .cmd-item:last-child { border-bottom: none; }
 
     .cmd-name {
@@ -451,20 +418,11 @@
       white-space: nowrap;
     }
 
-    .cmd-desc {
-      font-size: .8rem;
-      color: var(--muted);
-      text-align: right;
-    }
+    .cmd-desc { font-size: .8rem; color: var(--muted); text-align: right; }
 
-    /* ── STEPS ── */
     .steps { display: flex; flex-direction: column; gap: 2rem; max-width: 640px; }
 
-    .step {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
+    .step { display: flex; gap: 1.5rem; align-items: flex-start; }
 
     .step-num {
       flex-shrink: 0;
@@ -479,7 +437,6 @@
       box-shadow: 0 4px 16px rgba(39,196,245,0.3);
     }
 
-    .step-content {}
     .step-title {
       font-family: 'Exo 2', sans-serif;
       font-weight: 700;
@@ -490,19 +447,12 @@
 
     .step-desc { font-size: .875rem; color: var(--muted); line-height: 1.65; }
 
-    /* ── CTA ── */
-    .cta-section {
-      text-align: center;
-      padding: 100px 6%;
-    }
-
     .cta-box {
       background: linear-gradient(135deg, rgba(26,111,212,0.15), rgba(0,212,160,0.1));
       border: 1px solid rgba(39,196,245,0.2);
       border-radius: 24px;
       padding: 64px 40px;
-      max-width: 700px;
-      margin: 0 auto;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
@@ -525,14 +475,14 @@
       margin-bottom: 1rem;
     }
 
-    .cta-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      line-height: 1.6;
+    .cta-sub { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(39,196,245,0.15), transparent);
+      margin: 0 6%;
     }
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -543,65 +493,52 @@
       font-size: .8rem;
       line-height: 1.8;
     }
-
     footer a { color: var(--cyan); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(39,196,245,0.15), transparent);
-      margin: 0 6%;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .chat-demo-wrap { grid-template-columns: 1fr; }
-      .step { gap: 1rem; }
-      .cta-box { padding: 40px 24px; }
-    }
-
-    /* ── SCROLL ANIMATIONS ── */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
       transition: opacity .6s ease, transform .6s ease;
     }
     .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .chat-demo-wrap { grid-template-columns: 1fr; }
+      .step { gap: 1rem; }
+      .cta-box { padding: 40px 24px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">BotExtion</div>
   <ul class="nav-links">
-    <li><a href="#features">Можливості</a></li>
+    <li><a href="#features">Возможности</a></li>
     <li><a href="#demo">Демо</a></li>
-    <li><a href="#commands">Команди</a></li>
-    <li><a href="#howto">Як почати</a></li>
+    <li><a href="#commands">Команды</a></li>
+    <li><a href="#howto">Как начать</a></li>
   </ul>
-  <a href="https://t.me/BotExtion_bot" target="_blank" class="nav-btn">Додати в чат →</a>
+  <a href="https://t.me/BotExtion_bot" target="_blank" class="nav-btn">Добавить в чат →</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">Бот онлайн 24/7</div>
 
-  <h1>Оживи свій<br/><span>Telegram чат</span></h1>
+  <h1>Оживи свой<br/><span>Telegram чат</span></h1>
 
   <p class="hero-sub">
-    BotExtion — бот з ролями, економікою, шлюбами та ігровими діями між учасниками.
-    Один бот — безліч можливостей для твоєї групи.
+    BotExtion — бот с ролями, экономикой, браками и игровыми действиями между участниками.
+    Один бот — бесконечные возможности для твоей группы.
   </p>
 
   <div class="hero-actions">
-    <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary">🤖 Додати в групу</a>
-    <a href="#features" class="btn-ghost">Дізнатися більше</a>
+    <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary">🤖 Добавить в группу</a>
+    <a href="#features" class="btn-ghost">Узнать больше</a>
   </div>
 
-  <!-- TERMINAL -->
   <div class="terminal reveal">
     <div class="terminal-bar">
       <span class="dot r"></span>
@@ -609,13 +546,13 @@
       <span class="dot g"></span>
       <span class="terminal-title">BotExtion_bot — live</span>
     </div>
-    <div class="terminal-body" id="terminal-body">
+    <div class="terminal-body">
       <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">salary</span></div>
-      <div class="t-out t-ok">✅ Ти отримав 500 монет зарплати!</div>
+      <div class="t-out t-ok">✅ Ты получил 500 монет зарплаты!</div>
       <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">select role</span></div>
-      <div class="t-out t-ok">✅ Роль встановлена: Легенда</div>
+      <div class="t-out t-ok">✅ Роль установлена: Легенда</div>
       <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">marry</span></div>
-      <div class="t-out t-ok">💍 Пропозиція відправлена!</div>
+      <div class="t-out t-ok">💍 Предложение отправлено!</div>
       <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cursor"></span></div>
     </div>
   </div>
@@ -623,60 +560,58 @@
 
 <div class="divider"></div>
 
-<!-- FEATURES -->
 <section id="features">
-  <div class="section-label">// можливості</div>
-  <h2 class="section-title">Все для живого чату</h2>
-  <p class="section-sub">Від ігрових взаємодій до повноцінної системи модерації — BotExtion робить групові чати активними.</p>
+  <div class="section-label">// возможности</div>
+  <h2 class="section-title">Всё для живого чата</h2>
+  <p class="section-sub">От игровых взаимодействий до полноценной системы модерации — BotExtion делает групповые чаты активными.</p>
 
   <div class="features-grid">
     <div class="feature-card reveal">
       <span class="feature-icon">🎭</span>
       <div class="feature-title">Система ролей</div>
-      <div class="feature-desc">Призначай учасникам унікальні ролі. Адміни можуть створювати нові ролі та видавати їх іншим гравцям.</div>
+      <div class="feature-desc">Назначай участникам уникальные роли. Администраторы могут создавать новые роли и выдавать их другим игрокам.</div>
     </div>
     <div class="feature-card reveal">
       <span class="feature-icon">💰</span>
-      <div class="feature-title">Економіка чату</div>
-      <div class="feature-desc">Зарплата, баланс, перекази між гравцями та топ багатіїв. Стань найбагатшим у своїй групі!</div>
+      <div class="feature-title">Экономика чата</div>
+      <div class="feature-desc">Зарплата, баланс, переводы между игроками и топ богачей. Стань самым богатым в своей группе!</div>
     </div>
     <div class="feature-card reveal">
       <span class="feature-icon">💍</span>
-      <div class="feature-title">Шлюби</div>
-      <div class="feature-desc">Одружуйся з іншими учасниками чату, переглядай інформацію про шлюб або розлучайся.</div>
+      <div class="feature-title">Браки</div>
+      <div class="feature-desc">Женись на других участниках чата, просматривай информацию о браке или разводись.</div>
     </div>
     <div class="feature-card reveal">
       <span class="feature-icon">⚔️</span>
-      <div class="feature-title">Ігрові дії</div>
-      <div class="feature-desc">Понад 80 ігрових дій між учасниками — відповідай на повідомлення і виконуй дії. Підтримується і inline-режим!</div>
+      <div class="feature-title">Игровые действия</div>
+      <div class="feature-desc">Более 80 игровых действий между участниками — отвечай на сообщение и выполняй действия. Поддерживается inline-режим!</div>
     </div>
     <div class="feature-card reveal">
       <span class="feature-icon">🛡️</span>
-      <div class="feature-title">Модерація</div>
-      <div class="feature-desc">Мут, бан, варни з гнучкими налаштуваннями. Система рангів для адмінів — повний контроль над порядком.</div>
+      <div class="feature-title">Модерация</div>
+      <div class="feature-desc">Мут, бан, варны с гибкими настройками. Система рангов для администраторов — полный контроль над порядком.</div>
     </div>
     <div class="feature-card reveal">
       <span class="feature-icon">👤</span>
-      <div class="feature-title">Профілі та ніки</div>
-      <div class="feature-desc">Кожен учасник може встановити собі унікальний нік і переглядати свій профіль або профіль інших.</div>
+      <div class="feature-title">Профили и ники</div>
+      <div class="feature-desc">Каждый участник может установить себе уникальный ник и просматривать свой профиль или профиль других.</div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- DEMO -->
 <section id="demo">
   <div class="chat-demo-wrap">
     <div>
-      <div class="section-label">// як це виглядає</div>
-      <h2 class="section-title">Бот прямо в чаті</h2>
+      <div class="section-label">// как это выглядит</div>
+      <h2 class="section-title">Бот прямо в чате</h2>
       <p class="section-sub">
-        Просто напиши команду — бот відповість миттєво.
-        Відповідай на повідомлення учасника і виконуй ігрові дії.
-        Жодного зайвого налаштування.
+        Просто напиши команду — бот ответит мгновенно.
+        Отвечай на сообщение участника и выполняй игровые действия.
+        Никаких лишних настроек.
       </p>
-      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Спробувати зараз</a>
+      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Попробовать сейчас</a>
     </div>
 
     <div class="chat-window reveal">
@@ -689,38 +624,38 @@
       </div>
       <div class="chat-messages">
         <div class="msg user">
-          <div class="msg-sender">Ти</div>
+          <div class="msg-sender">Ты</div>
           <div class="msg-bubble">profile</div>
         </div>
         <div class="msg bot">
           <div class="msg-sender">BotExtion</div>
           <div class="msg-bubble">
             ===================================<br/>
-            Профіль:<br/>
-            Ім'я: <b>Олексій</b><br/>
+            Профиль:<br/>
+            Имя: <b>Алексей</b><br/>
             Роль: <b>Легенда</b><br/>
             ===================================
           </div>
         </div>
         <div class="msg-sep">— — —</div>
         <div class="msg user">
-          <div class="msg-sender">Ти</div>
+          <div class="msg-sender">Ты</div>
           <div class="msg-bubble">salary</div>
         </div>
         <div class="msg bot">
           <div class="msg-sender">BotExtion</div>
-          <div class="msg-bubble">✅ Ти отримав <b>500 монет</b> зарплати!</div>
+          <div class="msg-bubble">✅ Ты получил <b>500 монет</b> зарплаты!</div>
         </div>
         <div class="msg-sep">— — —</div>
         <div class="msg user">
-          <div class="msg-sender">Ти (у відповідь на повідомлення)</div>
+          <div class="msg-sender">Ты (в ответ на сообщение)</div>
           <div class="msg-bubble">Поцеловать</div>
         </div>
         <div class="msg bot">
           <div class="msg-sender">BotExtion</div>
           <div class="msg-bubble">
             ===================================<br/>
-            <b><i>Олексій</i> поцілував(-ла) <i>Марія</i></b><br/>
+            <b><i>Алексей</i> поцеловал(-ла) <i>Мария</i></b><br/>
             ===================================
           </div>
         </div>
@@ -731,64 +666,63 @@
 
 <div class="divider"></div>
 
-<!-- COMMANDS -->
 <section id="commands">
-  <div class="section-label">// команди</div>
-  <h2 class="section-title">Всі команди</h2>
-  <p class="section-sub">Пиши без "/" або зі слешем — бот розуміє обидва формати.</p>
+  <div class="section-label">// команды</div>
+  <h2 class="section-title">Все команды</h2>
+  <p class="section-sub">Пиши без "/" или со слешем — бот понимает оба формата.</p>
 
   <div class="commands-wrap reveal">
     <div class="cmd-group">
-      <div class="cmd-group-header">🧑‍💼 Профіль та ніки</div>
+      <div class="cmd-group-header">🧑‍💼 Профиль и ники</div>
       <ul class="cmd-list">
-        <li class="cmd-item"><span class="cmd-name">profile</span><span class="cmd-desc">Мій профіль</span></li>
-        <li class="cmd-item"><span class="cmd-name">my name</span><span class="cmd-desc">Показати нік</span></li>
-        <li class="cmd-item"><span class="cmd-name">rename</span><span class="cmd-desc">Змінити нік</span></li>
-        <li class="cmd-item"><span class="cmd-name">delete</span><span class="cmd-desc">Видалити нік</span></li>
+        <li class="cmd-item"><span class="cmd-name">profile</span><span class="cmd-desc">Мой профиль</span></li>
+        <li class="cmd-item"><span class="cmd-name">my name</span><span class="cmd-desc">Показать ник</span></li>
+        <li class="cmd-item"><span class="cmd-name">rename</span><span class="cmd-desc">Изменить ник</span></li>
+        <li class="cmd-item"><span class="cmd-name">delete</span><span class="cmd-desc">Удалить ник</span></li>
       </ul>
     </div>
     <div class="cmd-group">
-      <div class="cmd-group-header">🎭 Ролі</div>
+      <div class="cmd-group-header">🎭 Роли</div>
       <ul class="cmd-list">
         <li class="cmd-item"><span class="cmd-name">my role</span><span class="cmd-desc">Моя роль</span></li>
-        <li class="cmd-item"><span class="cmd-name">select role</span><span class="cmd-desc">Вибрати роль</span></li>
+        <li class="cmd-item"><span class="cmd-name">select role</span><span class="cmd-desc">Выбрать роль</span></li>
         <li class="cmd-item"><span class="cmd-name">list roles</span><span class="cmd-desc">Список ролей</span></li>
-        <li class="cmd-item"><span class="cmd-name">delete role</span><span class="cmd-desc">Видалити роль</span></li>
+        <li class="cmd-item"><span class="cmd-name">delete role</span><span class="cmd-desc">Удалить роль</span></li>
       </ul>
     </div>
     <div class="cmd-group">
-      <div class="cmd-group-header">💰 Економіка</div>
+      <div class="cmd-group-header">💰 Экономика</div>
       <ul class="cmd-list">
-        <li class="cmd-item"><span class="cmd-name">my balance</span><span class="cmd-desc">Мій баланс</span></li>
-        <li class="cmd-item"><span class="cmd-name">salary</span><span class="cmd-desc">Отримати зарплату</span></li>
-        <li class="cmd-item"><span class="cmd-name">top balance</span><span class="cmd-desc">Топ багатіїв</span></li>
-        <li class="cmd-item"><span class="cmd-name">pay 1000 @user</span><span class="cmd-desc">Переказ монет</span></li>
+        <li class="cmd-item"><span class="cmd-name">my balance</span><span class="cmd-desc">Мой баланс</span></li>
+        <li class="cmd-item"><span class="cmd-name">salary</span><span class="cmd-desc">Получить зарплату</span></li>
+        <li class="cmd-item"><span class="cmd-name">top balance</span><span class="cmd-desc">Топ богачей</span></li>
+        <li class="cmd-item"><span class="cmd-name">pay 1000 @user</span><span class="cmd-desc">Перевод монет</span></li>
       </ul>
     </div>
     <div class="cmd-group">
-      <div class="cmd-group-header">💍 Шлюби</div>
+      <div class="cmd-group-header">💍 Браки</div>
       <ul class="cmd-list">
-        <li class="cmd-item"><span class="cmd-name">marry</span><span class="cmd-desc">Пропозиція шлюбу</span></li>
-        <li class="cmd-item"><span class="cmd-name">my marriage</span><span class="cmd-desc">Інфо про шлюб</span></li>
-        <li class="cmd-item"><span class="cmd-name">divorce</span><span class="cmd-desc">Розлучення</span></li>
+        <li class="cmd-item"><span class="cmd-name">marry</span><span class="cmd-desc">Предложение руки</span></li>
+        <li class="cmd-item"><span class="cmd-name">my marriage</span><span class="cmd-desc">Инфо о браке</span></li>
+        <li class="cmd-item"><span class="cmd-name">divorce</span><span class="cmd-desc">Развод</span></li>
       </ul>
     </div>
     <div class="cmd-group">
-      <div class="cmd-group-header">🛡️ Модерація</div>
+      <div class="cmd-group-header">🛡️ Модерация</div>
       <ul class="cmd-list">
-        <li class="cmd-item"><span class="cmd-name">mute</span><span class="cmd-desc">Мут учасника</span></li>
-        <li class="cmd-item"><span class="cmd-name">ban</span><span class="cmd-desc">Бан учасника</span></li>
-        <li class="cmd-item"><span class="cmd-name">warn</span><span class="cmd-desc">Попередження</span></li>
-        <li class="cmd-item"><span class="cmd-name">settings</span><span class="cmd-desc">Налаштування модерації</span></li>
+        <li class="cmd-item"><span class="cmd-name">mute</span><span class="cmd-desc">Мут участника</span></li>
+        <li class="cmd-item"><span class="cmd-name">ban</span><span class="cmd-desc">Бан участника</span></li>
+        <li class="cmd-item"><span class="cmd-name">warn</span><span class="cmd-desc">Предупреждение</span></li>
+        <li class="cmd-item"><span class="cmd-name">settings</span><span class="cmd-desc">Настройки модерации</span></li>
       </ul>
     </div>
     <div class="cmd-group">
-      <div class="cmd-group-header">ℹ️ Загальне</div>
+      <div class="cmd-group-header">ℹ️ Общее</div>
       <ul class="cmd-list">
-        <li class="cmd-item"><span class="cmd-name">start</span><span class="cmd-desc">Привітання</span></li>
-        <li class="cmd-item"><span class="cmd-name">actions</span><span class="cmd-desc">Список дій</span></li>
-        <li class="cmd-item"><span class="cmd-name">commands</span><span class="cmd-desc">Всі команди</span></li>
-        <li class="cmd-item"><span class="cmd-name">donate</span><span class="cmd-desc">Підтримати бота</span></li>
+        <li class="cmd-item"><span class="cmd-name">start</span><span class="cmd-desc">Приветствие</span></li>
+        <li class="cmd-item"><span class="cmd-name">actions</span><span class="cmd-desc">Список действий</span></li>
+        <li class="cmd-item"><span class="cmd-name">commands</span><span class="cmd-desc">Все команды</span></li>
+        <li class="cmd-item"><span class="cmd-name">donate</span><span class="cmd-desc">Поддержать бота</span></li>
       </ul>
     </div>
   </div>
@@ -796,34 +730,33 @@
 
 <div class="divider"></div>
 
-<!-- HOW TO -->
 <section id="howto">
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
     <div>
-      <div class="section-label">// як почати</div>
-      <h2 class="section-title">Три кроки до живого чату</h2>
-      <p class="section-sub">Налаштування займає менше хвилини — жодного складного конфігурування.</p>
+      <div class="section-label">// как начать</div>
+      <h2 class="section-title">Три шага до живого чата</h2>
+      <p class="section-sub">Настройка занимает меньше минуты — никаких сложных конфигураций.</p>
 
       <div class="steps">
         <div class="step reveal">
           <div class="step-num">1</div>
           <div class="step-content">
-            <div class="step-title">Додай бота в групу</div>
-            <div class="step-desc">Натисни "Додати в групу" і вибери свій чат. Бот автоматично почне відслідковувати учасників.</div>
+            <div class="step-title">Добавь бота в группу</div>
+            <div class="step-desc">Нажми "Добавить в группу" и выбери свой чат. Бот автоматически начнёт отслеживать участников.</div>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-num">2</div>
           <div class="step-content">
-            <div class="step-title">Дай боту права адміна</div>
-            <div class="step-desc">Для модерації (мут, бан) бот потребує прав адміністратора. Для решти функцій — не потрібно.</div>
+            <div class="step-title">Дай боту права админа</div>
+            <div class="step-desc">Для модерации (мут, бан) боту нужны права администратора. Для остальных функций — не обязательно.</div>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-num">3</div>
           <div class="step-content">
-            <div class="step-title">Пиши команди і насолоджуйся</div>
-            <div class="step-desc">Введи <code style="color:var(--teal);background:rgba(0,212,160,0.1);padding:1px 6px;border-radius:4px;">commands</code> щоб побачити всі можливості. Або просто відповідай на повідомлення дією!</div>
+            <div class="step-title">Пиши команды и наслаждайся</div>
+            <div class="step-desc">Введи <code style="color:var(--teal);background:rgba(0,212,160,0.1);padding:1px 6px;border-radius:4px;">commands</code> чтобы увидеть все возможности. Или просто отвечай на сообщения действием!</div>
           </div>
         </div>
       </div>
@@ -831,25 +764,23 @@
 
     <div class="cta-box reveal" style="margin:0;">
       <div style="font-size:3rem;margin-bottom:1rem;">🚀</div>
-      <div class="cta-title">Готовий спробувати?</div>
-      <p class="cta-sub">Приєднуйся до чатів, які вже використовують BotExtion.</p>
-      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;">Відкрити в Telegram</a>
+      <div class="cta-title">Готов попробовать?</div>
+      <p class="cta-sub">Присоединяйся к чатам, которые уже используют BotExtion.</p>
+      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;">Открыть в Telegram</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div style="margin-bottom:.5rem;">
     <span style="font-family:'Exo 2',sans-serif;font-weight:900;font-size:1.1rem;background:linear-gradient(135deg,#27C4F5,#00D4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">BotExtion</span>
   </div>
   <a href="https://t.me/BotExtion_bot" target="_blank">@BotExtion_bot</a>
   &nbsp;·&nbsp;
-  Зроблено з ❤️ для живих Telegram-чатів
+  Сделано с ❤️ для живых Telegram-чатов
 </footer>
 
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
