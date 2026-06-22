@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BotExtion — Твій Telegram бот</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #070D1A;
+      --navy2:   #0D1629;
+      --card:    #111D35;
+      --blue:    #1A6FD4;
+      --cyan:    #27C4F5;
+      --teal:    #00D4A0;
+      --green:   #0FE3A0;
+      --text:    #D8EEFF;
+      --muted:   #6B8BAE;
+      --white:   #F0F8FF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,111,212,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,111,212,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6%;
+      backdrop-filter: blur(16px);
+      background: rgba(7,13,26,0.7);
+      border-bottom: 1px solid rgba(39,196,245,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-btn {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 10px 22px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity .2s, transform .2s;
+    }
+    .nav-btn:hover { opacity: .85; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 6% 60px;
+      gap: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--teal);
+      background: rgba(0,212,160,0.1);
+      border: 1px solid rgba(0,212,160,0.25);
+      padding: 6px 14px;
+      border-radius: 100px;
+      letter-spacing: .05em;
+    }
+
+    .hero-badge::before { content: '●'; font-size: .5rem; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--white);
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--teal) 50%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(39,196,245,0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(39,196,245,0.35); }
+
+    .btn-ghost {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(39,196,245,0.3);
+      color: var(--cyan);
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-ghost:hover { background: rgba(39,196,245,0.08); border-color: var(--cyan); }
+
+    /* ── TERMINAL ── */
+    .terminal {
+      width: 100%;
+      max-width: 560px;
+      background: #0A1628;
+      border: 1px solid rgba(39,196,245,0.15);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(39,196,245,0.05);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(39,196,245,0.08);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #FF5F57; }
+    .dot.y { background: #FFBD2E; }
+    .dot.g { background: #28CA42; }
+
+    .terminal-title {
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--muted);
+    }
+
+    .terminal-body {
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      line-height: 1.9;
+      text-align: left;
+      min-height: 180px;
+    }
+
+    .t-line { display: flex; gap: .5rem; }
+    .t-prompt { color: var(--teal); }
+    .t-cmd { color: var(--white); }
+    .t-out { color: var(--muted); padding-left: 1rem; }
+    .t-ok { color: var(--green); }
+    .t-cursor {
+      display: inline-block;
+      width: 8px; height: 1.1em;
+      background: var(--cyan);
+      vertical-align: middle;
+      animation: blink .8s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; padding: 100px 6%; }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--teal);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid rgba(39,196,245,0.08);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan), var(--teal));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(39,196,245,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .feature-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+
+    .feature-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── CHAT DEMO ── */
+    .chat-demo-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .chat-window {
+      background: #0D1629;
+      border: 1px solid rgba(39,196,245,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(39,196,245,0.08);
+    }
+
+    .chat-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    .chat-name {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--white);
+    }
+
+    .chat-status { font-size: .7rem; color: var(--teal); }
+
+    .chat-messages { padding: 18px; display: flex; flex-direction: column; gap: .75rem; }
+
+    .msg {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      max-width: 85%;
+    }
+
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .msg.bot { align-self: flex-start; }
+
+    .msg-sender { font-size: .65rem; color: var(--cyan); font-weight: 600; }
+    .msg.user .msg-sender { color: var(--teal); }
+
+    .msg-bubble {
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+
+    .msg.user .msg-bubble {
+      background: linear-gradient(135deg, var(--blue), #1557A8);
+      color: #fff;
+      border-bottom-right-radius: 3px;
+    }
+
+    .msg.bot .msg-bubble {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid rgba(39,196,245,0.1);
+      border-bottom-left-radius: 3px;
+    }
+
+    .msg-sep {
+      font-size: .7rem;
+      color: var(--muted);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── COMMANDS TABLE ── */
+    .commands-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cmd-group {
+      background: var(--card);
+      border: 1px solid rgba(39,196,245,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .cmd-group-header {
+      padding: 14px 20px;
+      background: rgba(39,196,245,0.05);
+      border-bottom: 1px solid rgba(39,196,245,0.08);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .cmd-list { list-style: none; }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 20px;
+      border-bottom: 1px solid rgba(39,196,245,0.05);
+      gap: 1rem;
+    }
+
+    .cmd-item:last-child { border-bottom: none; }
+
+    .cmd-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--teal);
+      background: rgba(0,212,160,0.08);
+      padding: 3px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .cmd-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 2rem; max-width: 640px; }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(39,196,245,0.3);
+    }
+
+    .step-content {}
+    .step-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: .35rem;
+    }
+
+    .step-desc { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 6%;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(26,111,212,0.15), rgba(0,212,160,0.1));
+      border: 1px solid rgba(39,196,245,0.2);
+      border-radius: 24px;
+      padding: 64px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(39,196,245,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    .cta-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 6%;
+      border-top: 1px solid rgba(39,196,245,0.07);
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.8;
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(39,196,245,0.15), transparent);
+      margin: 0 6%;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .chat-demo-wrap { grid-template-columns: 1fr; }
+      .step { gap: 1rem; }
+      .cta-box { padding: 40px 24px; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BotExtion</div>
+  <ul class="nav-links">
+    <li><a href="#features">Можливості</a></li>
+    <li><a href="#demo">Демо</a></li>
+    <li><a href="#commands">Команди</a></li>
+    <li><a href="#howto">Як почати</a></li>
+  </ul>
+  <a href="https://t.me/BotExtion_bot" target="_blank" class="nav-btn">Додати в чат →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Бот онлайн 24/7</div>
+
+  <h1>Оживи свій<br/><span>Telegram чат</span></h1>
+
+  <p class="hero-sub">
+    BotExtion — бот з ролями, економікою, шлюбами та ігровими діями між учасниками.
+    Один бот — безліч можливостей для твоєї групи.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary">🤖 Додати в групу</a>
+    <a href="#features" class="btn-ghost">Дізнатися більше</a>
+  </div>
+
+  <!-- TERMINAL -->
+  <div class="terminal reveal">
+    <div class="terminal-bar">
+      <span class="dot r"></span>
+      <span class="dot y"></span>
+      <span class="dot g"></span>
+      <span class="terminal-title">BotExtion_bot — live</span>
+    </div>
+    <div class="terminal-body" id="terminal-body">
+      <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">salary</span></div>
+      <div class="t-out t-ok">✅ Ти отримав 500 монет зарплати!</div>
+      <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">select role</span></div>
+      <div class="t-out t-ok">✅ Роль встановлена: Легенда</div>
+      <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cmd">marry</span></div>
+      <div class="t-out t-ok">💍 Пропозиція відправлена!</div>
+      <div class="t-line"><span class="t-prompt">user@chat:~$</span> <span class="t-cursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">// можливості</div>
+  <h2 class="section-title">Все для живого чату</h2>
+  <p class="section-sub">Від ігрових взаємодій до повноцінної системи модерації — BotExtion робить групові чати активними.</p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎭</span>
+      <div class="feature-title">Система ролей</div>
+      <div class="feature-desc">Призначай учасникам унікальні ролі. Адміни можуть створювати нові ролі та видавати їх іншим гравцям.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">💰</span>
+      <div class="feature-title">Економіка чату</div>
+      <div class="feature-desc">Зарплата, баланс, перекази між гравцями та топ багатіїв. Стань найбагатшим у своїй групі!</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">💍</span>
+      <div class="feature-title">Шлюби</div>
+      <div class="feature-desc">Одружуйся з іншими учасниками чату, переглядай інформацію про шлюб або розлучайся.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">⚔️</span>
+      <div class="feature-title">Ігрові дії</div>
+      <div class="feature-desc">Понад 80 ігрових дій між учасниками — відповідай на повідомлення і виконуй дії. Підтримується і inline-режим!</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🛡️</span>
+      <div class="feature-title">Модерація</div>
+      <div class="feature-desc">Мут, бан, варни з гнучкими налаштуваннями. Система рангів для адмінів — повний контроль над порядком.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">👤</span>
+      <div class="feature-title">Профілі та ніки</div>
+      <div class="feature-desc">Кожен учасник може встановити собі унікальний нік і переглядати свій профіль або профіль інших.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="chat-demo-wrap">
+    <div>
+      <div class="section-label">// як це виглядає</div>
+      <h2 class="section-title">Бот прямо в чаті</h2>
+      <p class="section-sub">
+        Просто напиши команду — бот відповість миттєво.
+        Відповідай на повідомлення учасника і виконуй ігрові дії.
+        Жодного зайвого налаштування.
+      </p>
+      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Спробувати зараз</a>
+    </div>
+
+    <div class="chat-window reveal">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div class="chat-name">BotExtion_bot</div>
+          <div class="chat-status">● online</div>
+        </div>
+      </div>
+      <div class="chat-messages">
+        <div class="msg user">
+          <div class="msg-sender">Ти</div>
+          <div class="msg-bubble">profile</div>
+        </div>
+        <div class="msg bot">
+          <div class="msg-sender">BotExtion</div>
+          <div class="msg-bubble">
+            ===================================<br/>
+            Профіль:<br/>
+            Ім'я: <b>Олексій</b><br/>
+            Роль: <b>Легенда</b><br/>
+            ===================================
+          </div>
+        </div>
+        <div class="msg-sep">— — —</div>
+        <div class="msg user">
+          <div class="msg-sender">Ти</div>
+          <div class="msg-bubble">salary</div>
+        </div>
+        <div class="msg bot">
+          <div class="msg-sender">BotExtion</div>
+          <div class="msg-bubble">✅ Ти отримав <b>500 монет</b> зарплати!</div>
+        </div>
+        <div class="msg-sep">— — —</div>
+        <div class="msg user">
+          <div class="msg-sender">Ти (у відповідь на повідомлення)</div>
+          <div class="msg-bubble">Поцеловать</div>
+        </div>
+        <div class="msg bot">
+          <div class="msg-sender">BotExtion</div>
+          <div class="msg-bubble">
+            ===================================<br/>
+            <b><i>Олексій</i> поцілував(-ла) <i>Марія</i></b><br/>
+            ===================================
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMMANDS -->
+<section id="commands">
+  <div class="section-label">// команди</div>
+  <h2 class="section-title">Всі команди</h2>
+  <p class="section-sub">Пиши без "/" або зі слешем — бот розуміє обидва формати.</p>
+
+  <div class="commands-wrap reveal">
+    <div class="cmd-group">
+      <div class="cmd-group-header">🧑‍💼 Профіль та ніки</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">profile</span><span class="cmd-desc">Мій профіль</span></li>
+        <li class="cmd-item"><span class="cmd-name">my name</span><span class="cmd-desc">Показати нік</span></li>
+        <li class="cmd-item"><span class="cmd-name">rename</span><span class="cmd-desc">Змінити нік</span></li>
+        <li class="cmd-item"><span class="cmd-name">delete</span><span class="cmd-desc">Видалити нік</span></li>
+      </ul>
+    </div>
+    <div class="cmd-group">
+      <div class="cmd-group-header">🎭 Ролі</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">my role</span><span class="cmd-desc">Моя роль</span></li>
+        <li class="cmd-item"><span class="cmd-name">select role</span><span class="cmd-desc">Вибрати роль</span></li>
+        <li class="cmd-item"><span class="cmd-name">list roles</span><span class="cmd-desc">Список ролей</span></li>
+        <li class="cmd-item"><span class="cmd-name">delete role</span><span class="cmd-desc">Видалити роль</span></li>
+      </ul>
+    </div>
+    <div class="cmd-group">
+      <div class="cmd-group-header">💰 Економіка</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">my balance</span><span class="cmd-desc">Мій баланс</span></li>
+        <li class="cmd-item"><span class="cmd-name">salary</span><span class="cmd-desc">Отримати зарплату</span></li>
+        <li class="cmd-item"><span class="cmd-name">top balance</span><span class="cmd-desc">Топ багатіїв</span></li>
+        <li class="cmd-item"><span class="cmd-name">pay 1000 @user</span><span class="cmd-desc">Переказ монет</span></li>
+      </ul>
+    </div>
+    <div class="cmd-group">
+      <div class="cmd-group-header">💍 Шлюби</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">marry</span><span class="cmd-desc">Пропозиція шлюбу</span></li>
+        <li class="cmd-item"><span class="cmd-name">my marriage</span><span class="cmd-desc">Інфо про шлюб</span></li>
+        <li class="cmd-item"><span class="cmd-name">divorce</span><span class="cmd-desc">Розлучення</span></li>
+      </ul>
+    </div>
+    <div class="cmd-group">
+      <div class="cmd-group-header">🛡️ Модерація</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">mute</span><span class="cmd-desc">Мут учасника</span></li>
+        <li class="cmd-item"><span class="cmd-name">ban</span><span class="cmd-desc">Бан учасника</span></li>
+        <li class="cmd-item"><span class="cmd-name">warn</span><span class="cmd-desc">Попередження</span></li>
+        <li class="cmd-item"><span class="cmd-name">settings</span><span class="cmd-desc">Налаштування модерації</span></li>
+      </ul>
+    </div>
+    <div class="cmd-group">
+      <div class="cmd-group-header">ℹ️ Загальне</div>
+      <ul class="cmd-list">
+        <li class="cmd-item"><span class="cmd-name">start</span><span class="cmd-desc">Привітання</span></li>
+        <li class="cmd-item"><span class="cmd-name">actions</span><span class="cmd-desc">Список дій</span></li>
+        <li class="cmd-item"><span class="cmd-name">commands</span><span class="cmd-desc">Всі команди</span></li>
+        <li class="cmd-item"><span class="cmd-name">donate</span><span class="cmd-desc">Підтримати бота</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW TO -->
+<section id="howto">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+    <div>
+      <div class="section-label">// як почати</div>
+      <h2 class="section-title">Три кроки до живого чату</h2>
+      <p class="section-sub">Налаштування займає менше хвилини — жодного складного конфігурування.</p>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Додай бота в групу</div>
+            <div class="step-desc">Натисни "Додати в групу" і вибери свій чат. Бот автоматично почне відслідковувати учасників.</div>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Дай боту права адміна</div>
+            <div class="step-desc">Для модерації (мут, бан) бот потребує прав адміністратора. Для решти функцій — не потрібно.</div>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Пиши команди і насолоджуйся</div>
+            <div class="step-desc">Введи <code style="color:var(--teal);background:rgba(0,212,160,0.1);padding:1px 6px;border-radius:4px;">commands</code> щоб побачити всі можливості. Або просто відповідай на повідомлення дією!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box reveal" style="margin:0;">
+      <div style="font-size:3rem;margin-bottom:1rem;">🚀</div>
+      <div class="cta-title">Готовий спробувати?</div>
+      <p class="cta-sub">Приєднуйся до чатів, які вже використовують BotExtion.</p>
+      <a href="https://t.me/BotExtion_bot" target="_blank" class="btn-primary" style="display:inline-block;">Відкрити в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="margin-bottom:.5rem;">
+    <span style="font-family:'Exo 2',sans-serif;font-weight:900;font-size:1.1rem;background:linear-gradient(135deg,#27C4F5,#00D4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">BotExtion</span>
+  </div>
+  <a href="https://t.me/BotExtion_bot" target="_blank">@BotExtion_bot</a>
+  &nbsp;·&nbsp;
+  Зроблено з ❤️ для живих Telegram-чатів
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
