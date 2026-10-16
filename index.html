@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#03060b">
+  <meta name="description" content="Знайомство з Telegram-ботом для групових чатів: ролі, репутація, економіка, роботи, ігри та інструменти модерації.">
+  <title>Рольовий бот для Telegram-груп</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти до вмісту</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="На початок сторінки">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>TG<span class="brand-accent">БОТ</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Відкрити меню">
+        <span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Головна навігація">
+        <a href="#features">Можливості</a>
+        <a href="#mechanics">Ігрові системи</a>
+        <a href="#for-users">Учасникам</a>
+        <a href="#for-admins">Адміністраторам</a>
+        <a href="#commands">Команди</a>
+        <a href="#faq">Питання</a>
+      </nav>
+      <div class="language-switch" role="group" aria-label="Мова сайту" data-no-translate>
+        <button type="button" data-site-language="ru" aria-pressed="false" title="Російська">РУС</button>
+        <button type="button" data-site-language="uk" aria-pressed="true" title="Українська">УКР</button>
+        <button type="button" data-site-language="en" aria-pressed="false" title="Англійська">ENG</button>
+      </div>
+      <a class="nav-cta" href="#commands">Переглянути команди <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-shell" id="top">
+      <canvas class="matrix-rain" id="matrix-rain" aria-hidden="true"></canvas>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Telegram-бот для групових чатів</p>
+          <h1>Додай у чат<br><span class="gradient-text">трохи більше гри.</span></h1>
+          <p class="hero-lede">Перетвори звичайний груповий чат на спільний ігровий світ: із персонажами, власними ролями, кар’єрним розвитком, економікою та інструментами модерації.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#features">Що вміє бот <span aria-hidden="true">↓</span></a>
+            <a class="button button-quiet" href="#how-to-start">Як почати <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-meta"><span class="online-indicator"></span><span>Переклади повідомлень: UA · EN · RU · окремий ігровий простір для кожної групи</span></div>
+        </div>
+
+        <div class="hero-visual" aria-label="Приклад ігрової активності в чаті">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="chat-card">
+            <div class="chat-topbar">
+              <div class="chat-avatar">✦</div>
+              <div><strong>Затишний чат</strong><small>група · бот активний</small></div>
+              <span class="chat-menu" aria-hidden="true">•••</span>
+            </div>
+            <div class="chat-body">
+              <div class="chat-date">СЬОГОДНІ</div>
+              <div class="chat-message user-message"><b>Марія</b><span>Профиль</span><time>18:42</time></div>
+              <div class="chat-message bot-message">
+                <b>✦ Бот</b>
+                <span>👤 <strong>Марія</strong><br>🎭 Роль: мандрівниця<br>⭐ Репутація: 12<br>💰 Баланс: 2 450 вирт</span>
+                <time>18:42</time>
+              </div>
+              <div class="chat-message user-message"><b>Олег</b><span>Казино</span><time>18:43</time></div>
+              <div class="chat-hint"><span>✦</span> Обирайте, чим оживити чат</div>
+            </div>
+            <div class="chat-input"><span>Написати повідомлення…</span><span class="send-icon" aria-hidden="true">↑</span></div>
+          </div>
+          <div class="float-chip chip-star"><span>✧</span> Репутація</div>
+          <div class="float-chip chip-coin"><span>◉</span> Вирт</div>
+          <div class="hero-spark spark-a">✳</div><div class="hero-spark spark-b">✦</div>
+        </div>
+      </div>
+      <div class="hero-bottom container">
+        <span>ОДИН БОТ</span><i></i><span>БАГАТО СПОСОБІВ ВЗАЄМОДІЯТИ</span><i></i><span>ВАШІ ПРАВИЛА ЧАТУ</span>
+      </div>
+    </section>
+
+    <section class="intro section-pad" id="features">
+      <div class="container">
+        <div class="section-heading heading-row">
+          <div><p class="eyebrow">МОЖЛИВОСТІ</p><h2>Чат, у якому завжди<br><span class="muted-heading">є чим зайнятися.</span></h2></div>
+          <p class="heading-note">Бот поєднує легкі рольові механіки та інструменти для керування спільнотою. Учасники грають і взаємодіють, адміністратори налаштовують порядок.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card feature-violet">
+            <div class="feature-icon">◎</div><span class="card-index">01 / СПІЛЬНОТА</span>
+            <h3>Персонаж і ролі</h3><p>Задай нік, створи біографію до 1 000 символів, переглядай профілі та обирай із переліку ролей чату. Адміністратор може призначити роль учаснику.</p>
+            <span class="card-orbit" aria-hidden="true">◎</span>
+          </article>
+          <article class="feature-card feature-blue">
+            <div class="feature-icon">↗</div><span class="card-index">02 / ВЗАЄМОДІЯ</span>
+            <h3>Репутація та стосунки</h3><p>Змінюй репутацію іншого учасника відповіддю на його повідомлення, переглядай рейтинг групи, створюй віртуальні шлюби та дивись інформацію про пару.</p>
+            <span class="card-orbit" aria-hidden="true">♡</span>
+          </article>
+          <article class="feature-card feature-green">
+            <div class="feature-icon">◉</div><span class="card-index">03 / ЕКОНОМІКА</span>
+            <h3>Вирт та кар’єра</h3><p>Отримуй і переказуй внутрішню валюту, влаштовуйся на роботу, виконуй плани для досвіду й просувайся через рівні та посади.</p>
+            <span class="card-orbit" aria-hidden="true">◉</span>
+          </article>
+          <article class="feature-card feature-orange">
+            <div class="feature-icon">▧</div><span class="card-index">04 / РОЗВАГИ</span>
+            <h3>Ігри та колекції</h3><p>Рулетка, слоти, кубик, монетка й блекджек; купуй лотерейні квитки, відкривай їх з інвентаря та збирай досягнення.</p>
+            <span class="card-orbit" aria-hidden="true">✧</span>
+          </article>
+          <article class="feature-card feature-pink">
+            <div class="feature-icon">⌂</div><span class="card-index">05 / ДЛЯ ГРУПИ</span>
+            <h3>Окремо для кожної групи</h3><p>Економіка, вакансії, репутація, ролі та мова повідомлень зберігаються з прив’язкою до чату, а не змішуються між групами.</p>
+            <span class="card-orbit" aria-hidden="true">⌂</span>
+          </article>
+          <article class="feature-card feature-cyan">
+            <div class="feature-icon">⌘</div><span class="card-index">06 / КЕРУВАННЯ</span>
+            <h3>Модерація з рангами</h3><p>Мут, бан і попередження, автоматична дія після ліміту варнів та налаштовувані ранги доступу до адміністративних команд.</p>
+            <span class="card-orbit" aria-hidden="true">⌘</span>
+          </article>
+          <article class="feature-card feature-actions">
+            <div class="feature-icon">⟢</div><span class="card-index">07 / ROLEPLAY</span>
+            <h3>Рольові дії в переписці</h3><p>Переглядай список ігрових дій і розігруй короткі сцени з іншими учасниками прямо в груповому чаті.</p>
+            <span class="card-orbit" aria-hidden="true">⟢</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mechanics-section section-pad" id="mechanics">
+      <div class="container">
+        <div class="section-heading heading-row">
+          <div><p class="eyebrow">ІГРОВІ СИСТЕМИ</p><h2>Прогрес має<br><span class="muted-heading">свої правила.</span></h2></div>
+          <p class="heading-note">Ось як взаємопов’язані основні механіки. Числа нижче відображають поточні значення в коді й можуть змінитися в наступних версіях.</p>
+        </div>
+        <div class="mechanics-grid">
+          <article class="mechanic-card mechanic-primary"><span class="mechanic-kicker">01 / ВНУТРІШНЯ ВАЛЮТА</span><div class="mechanic-value">500 <small>вирт</small></div><h3>Базова зарплата</h3><p>Команда зарплати додає 500 вирт на баланс. Її можна використати раз на 2 години; окремо є перекази між учасниками та рейтинг багатіїв чату.</p><div class="mechanic-meter"><span style="--meter:72%"></span></div><small class="mechanic-caption">КУЛДАУН · 2 ГОДИНИ</small></article>
+          <article class="mechanic-card"><span class="mechanic-kicker">02 / КАР’ЄРНИЙ ЦИКЛ</span><div class="mechanic-value">2<span class="value-unit">Г</span><b> / </b>4<span class="value-unit">Г</span></div><h3>Досвід і виплата за роботу</h3><p>Виконання робочого плану дає досвід і може підвищити рівень. План доступний раз на 2 години, а зарплата за роботу — раз на 4 години.</p><div class="mechanic-tags"><span>ПЛАН · 2 Г</span><span>ЗАРПЛАТА · 4 Г</span></div></article>
+          <article class="mechanic-card"><span class="mechanic-kicker">03 / РЕПУТАЦІЯ</span><div class="mechanic-value">+1 <small>/</small> −1</div><h3>Оцінка від спільноти</h3><p>Підвищуй або знижуй репутацію через відповідь на повідомлення людини. Є двогодинне очікування перед наступною оцінкою тому самому учаснику від тебе.</p><div class="mechanic-tags"><span>ПОТРІБНА ВІДПОВІДЬ</span><span>КУЛДАУН · 2 Г</span></div></article>
+          <article class="mechanic-card"><span class="mechanic-kicker">04 / ЛОТЕРЕЯ</span><div class="mechanic-value">1 000 <small>вирт / квиток</small></div><h3>Квиток у інвентарі</h3><p>Куплений квиток спочатку потрапляє до інвентаря. Відкрий його окремою командою й дізнайся виграш; джекпот у поточній конфігурації — 1 000 000 вирт.</p><div class="mechanic-tags"><span>ІНВЕНТАР</span><span>ДЖЕКПОТ · 1 МЛН</span></div></article>
+          <article class="mechanic-card"><span class="mechanic-kicker">05 / КАЗИНО</span><div class="mechanic-value">10–1М <small>вирт / ставка</small></div><h3>П’ять форматів гри</h3><p>Рулетка приймає ставку на колір, парність або число; є слоти, кубик, монетка та блекджек з кнопками «Взяти карту» і «Хватит».</p><div class="mechanic-tags"><span>РУЛЕТКА</span><span>СЛОТИ</span><span>БЛЕКДЖЕК</span></div></article>
+          <article class="mechanic-card"><span class="mechanic-kicker">06 / СТАТУСИ Й ДОСЯГНЕННЯ</span><div class="mechanic-value mechanic-value-word">VIP <b>·</b> PREMIUM <b>·</b> LEGEND</div><h3>Додаткові цілі</h3><p>У магазині є пакети віртуальної валюти та статуси за Telegram Stars. Статуси можуть давати бонус до зарплати й скорочувати робочі кулдауни; досягнення відзначають прогрес.</p><div class="mechanic-tags"><span>TELEGRAM STARS</span><span>ACHIEVEMENTS</span></div></article>
+        </div>
+        <p class="mechanics-disclaimer"><span>⌁</span> Віртуальна валюта використовується всередині бота. Виграші та баланси є частиною ігрової механіки.</p>
+      </div>
+    </section>
+
+    <section class="split-section section-pad" id="for-users">
+      <div class="container split-grid">
+        <div class="split-copy">
+          <p class="eyebrow">ДЛЯ УЧАСНИКІВ</p>
+          <h2>Створи власну<br><span class="gradient-text">історію в чаті.</span></h2>
+          <p class="section-lede">Почни з профілю — і поступово відкривай усе, що доступне саме у вашій групі. Учасники самі будують рольову історію, а не просто викликають команди.</p>
+          <ul class="check-list">
+            <li><span>✓</span><div><b>Покажи, хто ти</b><small>Налаштуй нік, роль і біографію персонажа.</small></div></li>
+            <li><span>✓</span><div><b>Взаємодій із друзями</b><small>Відповідай на повідомлення для переказів, репутації та інших дій.</small></div></li>
+            <li><span>✓</span><div><b>Розвивай персонажа</b><small>Працюй, накопичуй вирт, шукай вакансії та здобувай досягнення.</small></div></li>
+            <li><span>✓</span><div><b>Залишай власну історію</b><small>Заповнюй біографію, стеж за шлюбом, дивись інвентар та історію досягнень.</small></div></li>
+            <li><span>✓</span><div><b>Грай рольові сцени</b><small>Переглядай каталог дій і використовуй його для взаємодії в переписці.</small></div></li>
+          </ul>
+          <a class="text-link" href="#commands">Знайти команду для старту <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="profile-panel">
+          <div class="panel-top"><span>КАРТКА УЧАСНИКА</span><span class="panel-dots">•••</span></div>
+          <div class="profile-main"><div class="profile-avatar">M</div><div><h3>Твій персонаж</h3><p>Учасник спільноти</p></div><span class="status-pill">АКТИВНИЙ</span></div>
+          <div class="profile-stats"><div><span>🎭</span><small>РОЛЬ</small><b>Мандрівник</b></div><div><span>⭐</span><small>РЕПУТАЦІЯ</small><b>+12</b></div><div><span>◉</span><small>БАЛАНС</small><b>2 450</b></div></div>
+          <div class="profile-progress"><div class="progress-label"><span>Кар’єрний досвід</span><span>Рівень 4</span></div><div class="progress-track"><span></span></div><small>Ще трохи — і новий рівень</small></div>
+          <div class="profile-note"><span>✦</span> Прогрес і баланс на цій картці показано як приклад.</div>
+          <div class="panel-deco" aria-hidden="true">✳</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-section section-pad" id="for-admins">
+      <div class="container admin-grid">
+        <div class="admin-visual">
+          <div class="admin-window">
+            <div class="window-top"><span class="window-lights"><i></i><i></i><i></i></span><span>НАЛАШТУВАННЯ ЧАТУ</span></div>
+            <div class="permission-row"><div class="permission-symbol symbol-purple">⌘</div><div><b>Модерація</b><small>Мут · бан · попередження</small></div><span class="rank-tag">РАНГ 2–4</span></div>
+            <div class="permission-row"><div class="permission-symbol symbol-blue">⚙</div><div><b>Права команд</b><small>Мінімальний ранг для дії</small></div><span class="rank-tag">НАЛАШТУВАННЯ</span></div>
+            <div class="permission-row"><div class="permission-symbol symbol-green">✦</div><div><b>Мова чату</b><small>Українська · English · Русский</small></div><span class="rank-tag">ВЛАСНИК / 5</span></div>
+            <div class="permission-row"><div class="permission-symbol symbol-orange">▤</div><div><b>Роботи</b><small>Вакансії та кар’єрні рівні</small></div><span class="rank-tag">ВЛАСНИК / 5</span></div>
+            <div class="window-foot"><span class="window-check">✓</span> Параметри цієї групи</div>
+          </div>
+          <div class="admin-caption">Керування — за ролями й рівнями доступу</div>
+        </div>
+        <div class="admin-copy">
+          <p class="eyebrow">ДЛЯ АДМІНІСТРАТОРІВ</p>
+          <h2>Порядок, який<br><span class="gradient-text">підлаштовується.</span></h2>
+          <p class="section-lede">Використовуйте окремі ранги та налаштування чату, щоб розподілити відповідальність між адміністраторами.</p>
+          <div class="admin-points">
+            <article><span class="point-number">01</span><div><h3>Керуйте модерацією</h3><p>Застосовуйте мут, бан і попередження. Типове початкове правило — мут на 24 години після 3 попереджень; поріг, дію та тривалість можна змінити.</p></div></article>
+            <article><span class="point-number">02</span><div><h3>Розподіляйте доступ</h3><p>Адмінські ранги мають рівні від 1 до 5. Для частини команд власник чату або ранг 5 може змінити потрібний рівень.</p></div></article>
+            <article><span class="point-number">03</span><div><h3>Налаштовуйте простір</h3><p>Власник групи або ранг 5 може змінити мову повідомлень бота та додати власні вакансії для чату.</p></div></article>
+          </div>
+          <div class="rank-map" aria-label="Типові мінімальні ранги для адміністративних команд">
+            <div><span class="rank-level">02+</span><b>Мут</b><small>та зняття муту</small></div>
+            <div><span class="rank-level">03+</span><b>Попередження</b><small>керування варнами</small></div>
+            <div><span class="rank-level">04+</span><b>Бан</b><small>та розбан</small></div>
+            <div><span class="rank-level">05</span><b>Ранги й права</b><small>налаштування доступу</small></div>
+          </div>
+          <p class="rank-note">Це типові вимоги. Власник чату або ранг 5 може змінити мінімальний ранг для підтримуваних команд.</p>
+          <p class="admin-footnote">Деякі команди доступні лише власнику самого бота. Точні права залежать від команди та налаштувань групи.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="command-section section-pad" id="commands">
+      <div class="container">
+        <div class="section-heading heading-row command-heading">
+          <div><p class="eyebrow">ШВИДКИЙ ДОВІДНИК</p><h2>Почни з команди.</h2></div>
+          <p class="heading-note">Приклади звірені з командами та обробниками проєкту. Для дій над іншим учасником зазвичай потрібно відповісти на його повідомлення.</p>
+        </div>
+        <label class="command-search"><span aria-hidden="true">⌕</span><span class="sr-only">Пошук команди</span><input id="command-search" type="search" placeholder="Знайти: профіль, робота, мут…" autocomplete="off"><kbd>⌕</kbd></label>
+        <p class="search-status" id="search-status" aria-live="polite"></p>
+        <div class="command-grid" id="command-grid">
+          <article class="command-card" data-search="профиль профіль анкета користувач start старт"><div><span class="command-type">ПРОФІЛЬ</span><h3>Показати профіль</h3></div><code>Профиль</code></article>
+          <article class="command-card" data-search="ник nickname имя нік"><div><span class="command-type">ПЕРСОНАЛІЗАЦІЯ</span><h3>Змінити нік</h3></div><code>+ник нове ім’я</code></article>
+          <article class="command-card" data-search="роль роли role вибрати"><div><span class="command-type">РОЛІ</span><h3>Обрати роль</h3></div><code>Выбрать роль</code></article>
+          <article class="command-card" data-search="репутация реп reputation плюс минус"><div><span class="command-type">СПІЛЬНОТА</span><h3>Змінити репутацію</h3></div><code>+реп / -реп</code></article>
+          <article class="command-card" data-search="баланс вирт гроші currency"><div><span class="command-type">ЕКОНОМІКА</span><h3>Перевірити баланс</h3></div><code>Мой баланс</code></article>
+          <article class="command-card" data-search="зарплата salary робота робити"><div><span class="command-type">РОБОТА</span><h3>Отримати зарплату</h3></div><code>Зарплата</code></article>
+          <article class="command-card" data-search="казино рулетка слоты кубик монетка гра"><div><span class="command-type">МІНІІГРИ</span><h3>Відкрити казино</h3></div><code>Казино</code></article>
+          <article class="command-card" data-search="мут mute модерація покарати"><div><span class="command-type">МОДЕРАЦІЯ</span><h3>Обмежити учасника</h3></div><code>Мут (відповідь)</code></article>
+          <article class="command-card" data-search="варн warn попередження модерація"><div><span class="command-type">МОДЕРАЦІЯ</span><h3>Видати попередження</h3></div><code>Варн (відповідь)</code></article>
+          <article class="command-card" data-search="змінити мову language change англійська українська рус"><div><span class="command-type">НАЛАШТУВАННЯ</span><h3>Змінити мову чату</h3></div><code>Сменить язык</code></article>
+          <article class="command-card" data-search="команди help список"><div><span class="command-type">ДОВІДКА</span><h3>Список команд</h3></div><code>Команды</code></article>
+          <article class="command-card" data-search="работы вакансії список jobs career"><div><span class="command-type">КАР’ЄРА</span><h3>Переглянути вакансії</h3></div><code>Список работ</code></article>
+          <article class="command-card" data-search="блекджек blackjack карта ставка гра"><div><span class="command-type">МІНІІГРИ</span><h3>Почати блекджек</h3></div><code>Блекджек 100</code></article>
+          <article class="command-card" data-search="дії actions рольова гра список"><div><span class="command-type">ROLEPLAY</span><h3>Список рольових дій</h3></div><code>Действия</code></article>
+          <article class="command-card" data-search="переказ перевод pay вирт гроші учасник"><div><span class="command-type">ЕКОНОМІКА</span><h3>Переказати вирт</h3></div><code>Перевод (відповідь)</code></article>
+          <article class="command-card" data-search="план работы досвід кар'єра job experience"><div><span class="command-type">КАР’ЄРА</span><h3>Виконати робочий план</h3></div><code>Выполнить план работы</code></article>
+          <article class="command-card" data-search="лотерея квиток lottery jackpot виграш"><div><span class="command-type">ЛОТЕРЕЯ</span><h3>Купити квиток</h3></div><code>Купить билет</code></article>
+        </div>
+        <div class="no-results" id="no-results" hidden>Не знайшов такої команди. Спробуй інше слово.</div>
+        <p class="command-note"><span>ⓘ</span> Команди в прикладах наведені мовою, яку розпізнає поточний реєстр бота. Для дій з іншим учасником зазвичай потрібно відповісти на його повідомлення.</p>
+      </div>
+    </section>
+
+    <section class="start-section section-pad" id="how-to-start">
+      <div class="container start-panel">
+        <div class="start-glow" aria-hidden="true"></div>
+        <div class="start-content"><p class="eyebrow">ПЕРШІ КРОКИ</p><h2>Усе починається<br>з вашого чату.</h2><p>Додайте бота до Telegram-групи, надайте потрібні права, а потім надішліть команду «Команды», щоб переглянути доступні можливості.</p><a class="button button-light" href="#commands">Перейти до команд <span aria-hidden="true">→</span></a></div>
+        <div class="start-steps"><div><span>01</span><p>Додайте бота<br>до групи</p></div><i></i><div><span>02</span><p>Налаштуйте права<br>адміністратора</p></div><i></i><div><span>03</span><p>Оберіть команду<br>та починайте</p></div></div>
+      </div>
+    </section>
+
+    <section class="faq-section section-pad" id="faq">
+      <div class="container faq-grid">
+        <div><p class="eyebrow">ЧАСТІ ПИТАННЯ</p><h2>Коротко<br>про головне.</h2><p class="faq-intro">Відповіді про мову, права й роботу бота в групах.</p></div>
+        <div class="faq-list">
+          <details><summary>Які мови підтримує бот?<span>+</span></summary><p>У проєкті є переклади повідомлень російською, англійською та українською. Мову повідомлень змінюють для чату; доступ до цієї дії має власник групи або адміністратор рангу 5. Переклад повідомлень і фраза команди — окремі речі, тому окремі команди можуть лишатися російськими.</p></details>
+          <details><summary>Чи спільні баланс і ролі між різними чатами?<span>+</span></summary><p>Основні ігрові дані — зокрема баланс, роботи, репутація й ролі — зберігаються в контексті конкретного чату. Відтак кожна група має окремий ігровий простір.</p></details>
+          <details><summary>Які команди можуть виконувати звичайні учасники?<span>+</span></summary><p>Учасники можуть переглядати власний профіль, працювати з ролями й репутацією, користуватися економікою, вакансіями та іграми. Дії, що впливають на інших або налаштування групи, обмежені правами.</p></details>
+          <details><summary>Чи можна додати власну роботу або налаштувати модерацію?<span>+</span></summary><p>Так. Власник групи або адміністратор рангу 5 може створювати й видаляти вакансії чату. Права для команд модерації та поведінку після накопичення попереджень можна налаштовувати.</p></details>
+          <details><summary>Які є кулдауни й ліміти в економіці?<span>+</span></summary><p>Зараз базова зарплата — 500 вирт раз на 2 години. Робочий план дає досвід раз на 2 години, зарплата за роботу доступна раз на 4 години. Ставки в казино — від 10 до 1 000 000 вирт; окремі активні статуси скорочують частину очікувань.</p></details>
+          <details><summary>Де знайти посилання на бота?<span>+</span></summary><p>У доступних файлах проєкту не вказано публічний username або посилання для запрошення. Попросіть власника бота надіслати його Telegram-посилання.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">✦</span><span>TG<span class="brand-accent">БОТ</span></span></a><p>Більше спільних історій — у вашому Telegram-чаті.</p><a class="back-top" href="#top">На початок ↑</a></div>
+    <div class="container footer-bottom"><span>Інформаційна сторінка Telegram-бота</span><span>© <span id="current-year">2026</span> · Зроблено для спільнот</span></div>
+  </footer>
+</body>
+</html>
